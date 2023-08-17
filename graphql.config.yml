@@ -1,0 +1,13 @@
+schema: src/types/generated/graphql.schema.json
+extensions:
+  endpoints:
+    Default GraphQL Endpoint:
+      url: src/types/generated/graphql.schema.json
+      headers:
+        user-agent: JS GraphQL
+      introspect: true
+
+projects:
+  app:
+    schema: ["src/types/generated/graphql.schema.json", "directives.graphql"]
+    documents: ["**/*.graphql.ts", "my/fragments.graphql"]

@@ -1,0 +1,47 @@
+overwrite: true
+schema:
+  - https://dev.gocheckin.io/graphql:
+      headers:
+        x-hasura-admin-secret: ff2096128b01180cfeabe4d8b3226a7fbe69a2b0b74a28fe7169f835a421d6de
+documents: "src/**/*.graphql.ts"
+generates:
+  src/types/generated/types.ts:
+    plugins:
+      - typescript
+  ./:
+    preset: near-operation-file
+    presetConfig:
+      baseTypesPath: src/types/generated/types.ts
+    plugins:
+      - "typescript-operations"
+      - "typescript-react-apollo"
+    config:
+      documentMode: graphQLTag
+      reactApolloVersion: 3
+      withRefetchFn: false
+      withHook: false
+      exportFragmentSpreadSubTypes: true
+      strictScalars: true
+  src/types/generated/graphql.schema.json:
+    plugins:
+      - "introspection"
+config:
+  skipTypename: true
+  scalars:
+    uuid: string
+    phone_number: string
+    DateTime: string
+    date: string
+    timestamp: string
+    timestamptz: string
+    time: string
+    float8: number
+    geography: object
+    geometry: object
+    jsonb: object
+    gci_central_bigint: number
+    Int: number
+    bigint: number
+    numeric: number
+    gci_central_interval: string
+    interval: string
